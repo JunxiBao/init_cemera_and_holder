@@ -4,6 +4,7 @@ import listen_keyboard
 import libcamera
 
 
+
 def main():
     picamera = Picamera2()
     
@@ -21,8 +22,12 @@ def main():
         # 转换为 BGR 格式
         frame = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
 
+        frame[..., [0, 2]] = frame[..., [2, 0]]  # B 和 R 通道交换
+
         # 显示图像
         cv2.imshow("Camera Output", frame)
+
+        
 
         listen_keyboard.listen_keyboard()
 
